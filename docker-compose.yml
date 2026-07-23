@@ -1,0 +1,10 @@
+services:
+
+  app:
+    build: .
+    container_name: ecommerce_app
+
+    volumes:
+      - .:/app
+
+    tty: true

@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.env
+.venv
+
+data/raw/*
+data/processed/*
+
+logs/
+target/
+dbt_packages/
+
+.airflow/
