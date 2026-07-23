@@ -5,11 +5,24 @@ from products import generate_products
 from orders import generate_orders
 from order_items import generate_order_items
 from payments import generate_payments
+from datetime import datetime
+from pathlib import Path
+
+
 
 
 
 
 def main():
+
+    run_date = datetime.now().strftime("%Y-%m-%d")
+
+    output_dir = Path(f"data/raw/date={run_date}")
+
+    output_dir.mkdir(
+        parents=True,
+        exist_ok=True
+)
 
     customers_df = generate_customers(1000)
 
