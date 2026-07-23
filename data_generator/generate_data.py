@@ -1,19 +1,18 @@
-import pandas as pd
+from datetime import datetime
+from pathlib import Path
 
 from customers import generate_customers
 from products import generate_products
 from orders import generate_orders
 from order_items import generate_order_items
 from payments import generate_payments
-from datetime import datetime
-from pathlib import Path
-
-
-
-
 
 
 def main():
+
+    N_CUSTOMERS = 1000
+    N_PRODUCTS = 500
+    N_ORDERS = 10000
 
     run_date = datetime.now().strftime("%Y-%m-%d")
 
@@ -22,15 +21,19 @@ def main():
     output_dir.mkdir(
         parents=True,
         exist_ok=True
-)
+    )
 
-    customers_df = generate_customers(1000)
+    customers_df = generate_customers(
+        N_CUSTOMERS
+    )
 
-    products_df = generate_products(500)
+    products_df = generate_products(
+        N_PRODUCTS
+    )
 
     orders_df = generate_orders(
         customers_df,
-        n_orders=10000
+        N_ORDERS
     )
 
     order_items_df = generate_order_items(
@@ -44,31 +47,31 @@ def main():
     )
 
     customers_df.to_csv(
-        "data/raw/customers.csv",
+        output_dir / "customers.csv",
         index=False
     )
 
     products_df.to_csv(
-        "data/raw/products.csv",
+        output_dir / "products.csv",
         index=False
     )
 
     orders_df.to_csv(
-        "data/raw/orders.csv",
+        output_dir / "orders.csv",
         index=False
     )
 
     order_items_df.to_csv(
-        "data/raw/order_items.csv",
+        output_dir / "order_items.csv",
         index=False
     )
 
     payments_df.to_csv(
-        "data/raw/payments.csv",
+        output_dir / "payments.csv",
         index=False
     )
 
-    print("Data generated successfully")
+    print(f"Data generated successfully in: {output_dir}")
 
 
 if __name__ == "__main__":
